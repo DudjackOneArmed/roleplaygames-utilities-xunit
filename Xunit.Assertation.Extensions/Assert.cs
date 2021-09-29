@@ -1,11 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using Xunit.Assertation.Extensions;
 using Xunit.Assertation.Extensions.Exceptions;
 
-namespace Xunit.Assertation.Extensions
+namespace Xunit
 {
-    public static class Assert
+    public partial class Assert
     {
         public static AssertThat<T> That<T>(T item) => new AssertThat<T>(item);
 

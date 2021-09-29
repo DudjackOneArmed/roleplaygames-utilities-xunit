@@ -13,7 +13,7 @@
             var exception = Record.Exception(() => assertation.IsEqualTo(expected));
 
             // Assert
-            Xunit.Assert.Null(exception);
+            Assert.Null(exception);
         }
 
         [Theory]
@@ -27,7 +27,7 @@
             var exception = Record.Exception(() => assertation.IsEqualTo(expected));
 
             // Assert
-            Xunit.Assert.NotNull(exception);
+            Assert.NotNull(exception);
         }
 
         [Theory]
@@ -41,7 +41,7 @@
             var exception = Record.Exception(() => assertation.IsEqualTo(expected));
 
             // Assert
-            Xunit.Assert.Null(exception);
+            Assert.Null(exception);
         }
 
         [Theory]
@@ -55,7 +55,7 @@
             var exception = Record.Exception(() => assertation.IsEqualTo(expected));
 
             // Assert
-            Xunit.Assert.NotNull(exception);
+            Assert.NotNull(exception);
         }
 
         [Fact]
@@ -68,7 +68,7 @@
             var exception = Record.Exception(() => assertation.IsNotNull());
 
             // Assert
-            Xunit.Assert.NotNull(exception);
+            Assert.NotNull(exception);
         }
 
         [Fact]
@@ -81,7 +81,7 @@
             var exception = Record.Exception(() => assertation.IsNotNull());
 
             // Assert
-            Xunit.Assert.Null(exception);
+            Assert.Null(exception);
         }
 
         [Fact]
@@ -95,7 +95,7 @@
             var result = assertThat.IsEqualTo(obj);
 
             // Assert
-            Xunit.Assert.Same(assertThat, result);
+            Assert.Same(assertThat, result);
         }
 
         [Fact]
@@ -108,7 +108,7 @@
             var result = assertThat.IsNull();
 
             // Assert
-            Xunit.Assert.Same(assertThat, result);
+            Assert.Same(assertThat, result);
         }
 
         [Fact]
@@ -121,7 +121,7 @@
             var result = assertThat.IsNotNull();
 
             // Assert
-            Xunit.Assert.Same(assertThat, result);
+            Assert.Same(assertThat, result);
         }
 
         [Fact]
@@ -135,7 +135,7 @@
             var result = assertThat.IsSame(obj);
 
             // Assert
-            Xunit.Assert.Same(assertThat, result);
+            Assert.Same(assertThat, result);
         }
     }
 }
