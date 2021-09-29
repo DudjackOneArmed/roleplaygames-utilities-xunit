@@ -72,7 +72,7 @@
         }
 
         [Fact]
-        public void IsNotNull_ItemIsNotNull_DiesNotThrowException()
+        public void IsNotNull_ItemIsNotNull_DoesNotThrowException()
         {
             // Arrange
             var assertation = new AssertThat<object>(new());
@@ -82,6 +82,60 @@
 
             // Assert
             Xunit.Assert.Null(exception);
+        }
+
+        [Fact]
+        public void IsEqualTo_InPositiveCase_ReturnThatObject()
+        {
+            // Arrange
+            object obj = new();
+            var assertThat = new AssertThat<object>(obj);
+
+            // Act
+            var result = assertThat.IsEqualTo(obj);
+
+            // Assert
+            Xunit.Assert.Same(assertThat, result);
+        }
+
+        [Fact]
+        public void IsNull_InPositiveCase_ReturnThatObject()
+        {
+            // Arrange
+            var assertThat = new AssertThat<object>(null);
+
+            // Act
+            var result = assertThat.IsNull();
+
+            // Assert
+            Xunit.Assert.Same(assertThat, result);
+        }
+
+        [Fact]
+        public void IsNotNull_InPositiveCase_ReturnThatObject()
+        {
+            // Arrange
+            var assertThat = new AssertThat<object>(new());
+
+            // Act
+            var result = assertThat.IsNotNull();
+
+            // Assert
+            Xunit.Assert.Same(assertThat, result);
+        }
+
+        [Fact]
+        public void IsSame_InPositiveCase_ReturnThatObject()
+        {
+            // Arrange
+            object obj = new();
+            var assertThat = new AssertThat<object>(obj);
+
+            // Act
+            var result = assertThat.IsSame(obj);
+
+            // Assert
+            Xunit.Assert.Same(assertThat, result);
         }
     }
 }

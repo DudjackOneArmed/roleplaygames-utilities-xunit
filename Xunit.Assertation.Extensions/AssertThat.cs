@@ -11,26 +11,35 @@ namespace Xunit.Assertation.Extensions
             Item = item;
         }
 
-        public void IsEqualTo(T item)
+        public AssertThat<T> IsEqualTo(T item)
         {
             XunitAssert.Equal(item, Item);
+            return this;
         }
 
-        public void IsEqualTo(object item)
+        public AssertThat<T> IsEqualTo(object item)
         {
             XunitAssert.Equal(item, Item);
+            return this;
         }
 
-        public void IsNull()
+        public AssertThat<T> IsNull()
         {
             XunitAssert.Null(Item);
+            return this;
         }
 
-        public void IsNotNull()
+        public AssertThat<T> IsNotNull()
         {
             XunitAssert.NotNull(Item);
+            return this;
         }
 
-        public void IsSame(T item) => XunitAssert.Same(item, Item);
+        public AssertThat<T> IsSame(T item)
+        {
+            XunitAssert.Same(item, Item);
+            return this;
+        }
     }
+
 }

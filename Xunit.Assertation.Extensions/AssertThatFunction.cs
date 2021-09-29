@@ -12,21 +12,24 @@ namespace Xunit.Assertation.Extensions
             Func = func ?? throw new ArgumentNullException(nameof(func));
         }
 
-        public void Throws<TException>() where TException : Exception
+        public AssertThatFunction<T> Throws<TException>() where TException : Exception
         {
             Xunit.Assert.Throws<TException>(() => Func.Invoke());
+            return this;
         }
 
-        public void Throws()
+        public AssertThatFunction<T> Throws()
         {
             Xunit.Assert.Throws<Exception>(() => Func.Invoke());
+            return this;
         }
 
-        public void DoesNotThrow()
+        public AssertThatFunction<T> DoesNotThrow()
         {
             try
             {
                 Func.Invoke();
+                return this;
             }
             catch (Exception ex)
             {
@@ -34,9 +37,10 @@ namespace Xunit.Assertation.Extensions
             }
         }
 
-        public void Returns(T expectedResult)
+        public AssertThatFunction<T> Returns(T expectedResult)
         {
             Assert.That(Func.Invoke()).IsSame(expectedResult);
+            return this;
         }
     }
 }
