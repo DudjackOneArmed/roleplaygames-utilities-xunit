@@ -12,21 +12,24 @@ namespace Xunit.Assertation.Extensions
             Action = action ?? throw new ArgumentNullException(nameof(action));
         }
 
-        public void Throws<TException>() where TException : Exception
+        public AssertThatAction Throws<TException>() where TException : Exception
         {
             Xunit.Assert.Throws<TException>(() => Action.Invoke());
+            return this;
         }
 
-        public void Throws()
+        public AssertThatAction Throws()
         {
             Xunit.Assert.Throws<Exception>(() => Action.Invoke());
+            return this;
         }
 
-        public void DoesNotThrow()
+        public AssertThatAction DoesNotThrow()
         {
             try
             {
                 Action.Invoke();
+                return this;
             } 
             catch(Exception ex)
             {

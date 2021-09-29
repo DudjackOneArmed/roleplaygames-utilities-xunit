@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Xunit.Assertation.Extensions.Exceptions;
 
 namespace Xunit.Assertation.Extensions.Test
@@ -30,6 +26,46 @@ namespace Xunit.Assertation.Extensions.Test
 
             // Act & Assert
             Xunit.Assert.Throws<DoesNotThrowAssertationException>(() => assertThatAction.DoesNotThrow());
+        }
+
+        [Fact]
+        public void Throws_InPositiveCase_ReturnThatObject()
+        {
+            // Arrange
+            AssertThatFunction<object> assertThatAction = new(() => throw new Exception());
+
+            // Act
+            var result = assertThatAction.Throws();
+
+            // Assert
+            Xunit.Assert.Same(assertThatAction, result);
+        }
+
+        [Fact]
+        public void DoesNotThrow_InPositiveCase_ReturnThatObject()
+        {
+            // Arrange
+            AssertThatFunction<object> assertThatAction = new(() => new object());
+
+            // Act
+            var result = assertThatAction.DoesNotThrow();
+
+            // Assert
+            Xunit.Assert.Same(assertThatAction, result);
+        }
+
+        [Fact]
+        public void Returns_InPositiveCase_ReturnThatObject()
+        {
+            // Arrange
+            object obj = new();
+            AssertThatFunction<object> assertThatAction = new(() => obj);
+
+            // Act
+            var result = assertThatAction.Returns(obj);
+
+            // Assert
+            Xunit.Assert.Same(assertThatAction, result);
         }
     }
 }
