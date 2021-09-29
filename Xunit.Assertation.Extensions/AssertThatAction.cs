@@ -14,13 +14,13 @@ namespace Xunit.Assertation.Extensions
 
         public AssertThatAction Throws<TException>() where TException : Exception
         {
-            Xunit.Assert.Throws<TException>(() => Action.Invoke());
+            Assert.Throws<TException>(() => Action.Invoke());
             return this;
         }
 
         public AssertThatAction Throws()
         {
-            Xunit.Assert.Throws<Exception>(() => Action.Invoke());
+            Assert.Throws<Exception>(() => Action.Invoke());
             return this;
         }
 

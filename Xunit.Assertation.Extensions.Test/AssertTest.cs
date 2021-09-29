@@ -9,13 +9,13 @@ namespace Xunit.Assertation.Extensions.Test
         {
             // Arrange & Act
             var exception = Record.Exception(() => Assert.All(
-                () => Xunit.Assert.Equal(1, 1),
-                () => Xunit.Assert.Equal(-12, -12)
+                () => Assert.Equal(1, 1),
+                () => Assert.Equal(-12, -12)
                 )
             );
 
             // Assert
-            Xunit.Assert.Null(exception);
+            Assert.Null(exception);
         }
 
         [Fact]
@@ -23,13 +23,13 @@ namespace Xunit.Assertation.Extensions.Test
         {
             // Arrange & Act
             var exception = Record.Exception(() => Assert.All(
-                () => Xunit.Assert.Equal(1, 1),
-                () => Xunit.Assert.Equal(-12, -2)
+                () => Assert.Equal(1, 1),
+                () => Assert.Equal(-12, -2)
                 )
             );
 
             // Assert
-            Xunit.Assert.NotNull(exception);
+            Assert.NotNull(exception);
         }
 
         [Fact]
@@ -37,19 +37,19 @@ namespace Xunit.Assertation.Extensions.Test
         {
             // Arrange & Act
             var exception = Record.Exception(() => Assert.All(
-                () => Xunit.Assert.Equal(1, 1),
-                () => Xunit.Assert.Equal(-12, -2),
-                () => Xunit.Assert.Equal(12, 2)
+                () => Assert.Equal(1, 1),
+                () => Assert.Equal(-12, -2),
+                () => Assert.Equal(12, 2)
                 )
             );
 
             // Assert
-            Xunit.Assert.NotNull(exception);
-            Xunit.Assert.IsType<AssertAllExceptions>(exception);
+            Assert.NotNull(exception);
+            Assert.IsType<AssertAllExceptions>(exception);
 
             var assertAllExceptions = exception as AssertAllExceptions;
 
-            Xunit.Assert.Equal(2, assertAllExceptions.InnerExceptions.Count);
+            Assert.Equal(2, assertAllExceptions.InnerExceptions.Count);
         }
     }
 }

@@ -15,7 +15,7 @@ namespace Xunit.Assertation.Extensions.Test
             var exception = Record.Exception(() => assertThatAction.DoesNotThrow());
 
             // Assert
-            Xunit.Assert.Null(exception);
+            Assert.Null(exception);
         }
 
         [Fact]
@@ -25,7 +25,7 @@ namespace Xunit.Assertation.Extensions.Test
             AssertThatAction assertThatAction = new(() => throw new Exception());
 
             // Act & Assert
-            Xunit.Assert.Throws<DoesNotThrowAssertationException>(() => assertThatAction.DoesNotThrow());
+            Assert.Throws<DoesNotThrowAssertationException>(() => assertThatAction.DoesNotThrow());
         }
 
         [Fact]
@@ -38,7 +38,7 @@ namespace Xunit.Assertation.Extensions.Test
             var result = assertThatAction.Throws();
 
             // Assert
-            Xunit.Assert.Same(assertThatAction, result);
+            Assert.Same(assertThatAction, result);
         }
 
         [Fact]
@@ -51,7 +51,7 @@ namespace Xunit.Assertation.Extensions.Test
             var result = assertThatAction.DoesNotThrow();
 
             // Assert
-            Xunit.Assert.Same(assertThatAction, result);
+            Assert.Same(assertThatAction, result);
         }
     }
 }

@@ -1,4 +1,4 @@
-﻿using XunitAssert = Xunit.Assert;
+﻿using Xunit;
 
 namespace Xunit.Assertation.Extensions
 {
@@ -13,31 +13,31 @@ namespace Xunit.Assertation.Extensions
 
         public AssertThat<T> IsEqualTo(T item)
         {
-            XunitAssert.Equal(item, Item);
+            Assert.Equal(item, Item);
             return this;
         }
 
         public AssertThat<T> IsEqualTo(object item)
         {
-            XunitAssert.Equal(item, Item);
+            Assert.Equal(item, Item);
             return this;
         }
 
         public AssertThat<T> IsNull()
         {
-            XunitAssert.Null(Item);
+            Assert.Null(Item);
             return this;
         }
 
         public AssertThat<T> IsNotNull()
         {
-            XunitAssert.NotNull(Item);
+            Assert.NotNull(Item);
             return this;
         }
 
         public AssertThat<T> IsSame(T item)
         {
-            XunitAssert.Same(item, Item);
+            Assert.Same(item, Item);
             return this;
         }
     }
