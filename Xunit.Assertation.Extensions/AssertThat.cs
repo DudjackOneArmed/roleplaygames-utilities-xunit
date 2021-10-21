@@ -1,6 +1,4 @@
-﻿using Xunit;
-
-namespace Xunit.Assertation.Extensions
+﻿namespace Xunit.Assertation.Extensions
 {
     public class AssertThat<T>
     {
@@ -41,5 +39,4 @@ namespace Xunit.Assertation.Extensions
             return this;
         }
     }
-
 }
