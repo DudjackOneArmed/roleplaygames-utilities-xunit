@@ -4,6 +4,18 @@ namespace Xunit.Assertation.Extensions.Test
 {
     public class AssertTest
     {
+        [Theory]
+        [InlineData(true)]
+        [InlineData(false)]
+        public void That_WhenItemIsBoolean_ReturnObjectOfAssertThatBoolean(bool item)
+        {
+            // Arrange && Act
+            var assertThat = Assert.That(item);
+
+            // Assert
+            Assert.IsType<AssertThatBoolean>(assertThat);
+        }
+
         [Fact]
         public void All_ActionsNotThrowExceptions_DoesNotThrowException()
         {
