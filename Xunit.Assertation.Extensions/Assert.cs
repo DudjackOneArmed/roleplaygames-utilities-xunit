@@ -8,6 +8,11 @@ namespace Xunit
 {
     public partial class Assert
     {
+        public static AssertThat<U> That<U, T>(U item) where U : IEnumerable<T>
+        {
+            return new AssertThatIEnumerable<U, T>(item);
+        }
+
         public static AssertThat<T> That<T>(T item) => new AssertThat<T>(item);
 
         public static AssertThat<object> That(object item) => new AssertThat<object>(item);
