@@ -1,23 +1,28 @@
 ﻿namespace Xunit.Assertation.Extensions
 {
-    public static class AssertThatBooleanExtensions
+    public class AssertThatBoolean : AssertThat<bool>
     {
+        public AssertThatBoolean(bool item) : base(item)
+        {
+
+        }
+
         /// <summary>
         /// Assert that item is true
         /// </summary>
-        public static AssertThat<bool> IsTrue(this AssertThat<bool> assertThat)
+        public AssertThat<bool> IsTrue()
         {
-            Assert.True(assertThat.Item);
-            return assertThat;
+            Assert.True(Item);
+            return this;
         }
 
         /// <summary>
         /// Assert that item is false
         /// </summary>
-        public static AssertThat<bool> IsFalse(this AssertThat<bool> assertThat)
+        public AssertThat<bool> IsFalse()
         {
-            Assert.False(assertThat.Item);
-            return assertThat;
+            Assert.False(Item);
+            return this;
         }
     }
 }
