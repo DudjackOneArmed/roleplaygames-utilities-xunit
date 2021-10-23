@@ -4,16 +4,16 @@ using System.Text;
 
 namespace Xunit.Assertation.Extensions.Exceptions
 {
-    public class AssertAllExceptions : Exception
+    public class AssertAllException : Exception
     {
         public IReadOnlyCollection<Exception> InnerExceptions { get; }
 
-        public AssertAllExceptions(IReadOnlyCollection<Exception> exceptions, string message) : base(message)
+        public AssertAllException(IReadOnlyCollection<Exception> exceptions, string message) : base(message)
         {
             InnerExceptions = exceptions ?? throw new ArgumentNullException(nameof(exceptions));
         }
 
-        public AssertAllExceptions(IReadOnlyCollection<Exception> exceptions) : this(exceptions, CreateErrorMessage(exceptions))
+        public AssertAllException(IReadOnlyCollection<Exception> exceptions) : this(exceptions, CreateErrorMessage(exceptions))
         {
 
         }
