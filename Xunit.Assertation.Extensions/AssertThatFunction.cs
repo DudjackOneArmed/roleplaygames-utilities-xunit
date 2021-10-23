@@ -32,7 +32,7 @@ namespace Xunit.Assertation.Extensions
             throw new ThrowsAssertationException();
         }
 
-        public AssertThatFunction<T> DoesNotThrow()
+        public AssertThatFunction<T> DoesNotThrowException()
         {
             try
             {

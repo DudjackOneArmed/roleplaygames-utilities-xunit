@@ -20,7 +20,7 @@ namespace Xunit.Assertation.Extensions.Test
             var assert = new AssertThatIEnumerable<ICollection<int>, int>(collection);
 
             // Act && Assert
-            Assert.ThatCode(() => assert.Contains(collection.First())).DoesNotThrow();
+            Assert.ThatCode(() => assert.Contains(collection.First())).DoesNotThrowException();
         }
 
         [Theory]
@@ -42,7 +42,7 @@ namespace Xunit.Assertation.Extensions.Test
             var assert = new AssertThatIEnumerable<ICollection<int>, int>(collection);
 
             // Act && Assert
-            Assert.ThatCode(() => assert.DoesNotContain(0)).DoesNotThrow();
+            Assert.ThatCode(() => assert.DoesNotContain(0)).DoesNotThrowException();
         }
 
         [Theory]
@@ -64,7 +64,7 @@ namespace Xunit.Assertation.Extensions.Test
             var assert = new AssertThatIEnumerable<ICollection<int>, int>(collection);
 
             // Act && Assert
-            Assert.ThatCode(() => assert.HasCount(collection.Count)).DoesNotThrow();
+            Assert.ThatCode(() => assert.HasCount(collection.Count)).DoesNotThrowException();
         }
 
         [Theory]
@@ -90,7 +90,7 @@ namespace Xunit.Assertation.Extensions.Test
             var assert = new AssertThatIEnumerable<ICollection<int>, int>(collection);
 
             // Act && Assert
-            Assert.ThatCode(() => assert.IsEmpty()).DoesNotThrow();
+            Assert.ThatCode(() => assert.IsEmpty()).DoesNotThrowException();
         }
 
         [Theory]
@@ -112,7 +112,7 @@ namespace Xunit.Assertation.Extensions.Test
             var assert = new AssertThatIEnumerable<ICollection<int>, int>(collection);
 
             // Act && Assert
-            Assert.ThatCode(() => assert.IsNotEmpty()).DoesNotThrow();
+            Assert.ThatCode(() => assert.IsNotEmpty()).DoesNotThrowException();
         }
 
         [Theory]
@@ -138,7 +138,7 @@ namespace Xunit.Assertation.Extensions.Test
             var assert = new AssertThatIEnumerable<ICollection<int>, int>(collection);
 
             // Act && Assert
-            Assert.ThatCode(() => assert.Single()).DoesNotThrow();
+            Assert.ThatCode(() => assert.Single()).DoesNotThrowException();
         }
 
         [Theory]
@@ -160,7 +160,7 @@ namespace Xunit.Assertation.Extensions.Test
             var assert = new AssertThatIEnumerable<ICollection<int>, int>(collection);
 
             // Act && Assert
-            Assert.ThatCode(() => assert.Single(collection.First())).DoesNotThrow();
+            Assert.ThatCode(() => assert.Single(collection.First())).DoesNotThrowException();
         }
 
         [Theory]
@@ -183,7 +183,7 @@ namespace Xunit.Assertation.Extensions.Test
             var assert = new AssertThatIEnumerable<ICollection<int>, int>(collection);
 
             // Act && Assert
-            Assert.ThatCode(() => assert.Single(x => x == collection.First())).DoesNotThrow();
+            Assert.ThatCode(() => assert.Single(x => x == collection.First())).DoesNotThrowException();
         }
 
         [Theory]
@@ -206,7 +206,7 @@ namespace Xunit.Assertation.Extensions.Test
             var assert = new AssertThatIEnumerable<ICollection<int>, int>(collection);
 
             // Act && Assert
-            Assert.ThatCode(() => assert.All(x => x is int)).DoesNotThrow();
+            Assert.ThatCode(() => assert.All(x => x is int)).DoesNotThrowException();
         }
 
         [Theory]
@@ -228,7 +228,7 @@ namespace Xunit.Assertation.Extensions.Test
             var assert = new AssertThatIEnumerable<ICollection<int>, int>(collection);
 
             // Act && Assert
-            Assert.ThatCode(() => assert.Any(x => x == collection.Last())).DoesNotThrow();
+            Assert.ThatCode(() => assert.Any(x => x == collection.Last())).DoesNotThrowException();
         }
 
         [Theory]
@@ -255,7 +255,7 @@ namespace Xunit.Assertation.Extensions.Test
                 inspectors[i] = x => { };
 
             // Act && Assert
-            Assert.ThatCode(() => assert.Collection(inspectors)).DoesNotThrow();
+            Assert.ThatCode(() => assert.Collection(inspectors)).DoesNotThrowException();
         }
 
         [Theory]
@@ -281,7 +281,7 @@ namespace Xunit.Assertation.Extensions.Test
             var assert = new AssertThatIEnumerable<ICollection<int>, int>(collection);
 
             // Act && Assert
-            Assert.ThatCode(() => assert.ForEach(x => { })).DoesNotThrow();
+            Assert.ThatCode(() => assert.ForEach(x => { })).DoesNotThrowException();
         }
 
         [Theory]
@@ -309,7 +309,7 @@ namespace Xunit.Assertation.Extensions.Test
             var assert = new AssertThatIEnumerable<ICollection<int>, int>(collection);
 
             // Act && Assert
-            Assert.ThatCode(() => assert.AssertForEach(x => { })).DoesNotThrow();
+            Assert.ThatCode(() => assert.AssertForEach(x => { })).DoesNotThrowException();
         }
 
         [Theory]
