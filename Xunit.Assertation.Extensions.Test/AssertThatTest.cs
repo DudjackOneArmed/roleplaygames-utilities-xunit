@@ -137,5 +137,83 @@
             // Assert
             Assert.Same(assertThat, result);
         }
+
+        [Fact]
+        public void IsType_ItemIsThatType_DoesNotThrowException()
+        {
+            // Arrange
+            var assertation = new AssertThat<object>(new());
+
+            // Act
+            var exception = Record.Exception(() => assertation.IsType<object>());
+
+            // Assert
+            Assert.Null(exception);
+        }
+
+        [Fact]
+        public void IsType_ItemIsNotThatType_ThrowsException()
+        {
+            // Arrange
+            var assertation = new AssertThat<object>(new());
+
+            // Act
+            var exception = Record.Exception(() => assertation.IsType<string>());
+
+            // Assert
+            Assert.NotNull(exception);
+        }
+
+        [Fact]
+        public void IsType_InPositiveCase_ReturnThatObject()
+        {
+            // Arrange
+            var assertThat = new AssertThat<object>(new());
+
+            // Act
+            var result = assertThat.IsType<object>();
+
+            // Assert
+            Assert.Same(assertThat, result);
+        }
+
+        [Fact]
+        public void IsNotType_ItemIsNotThatType_DoesNotThrowException()
+        {
+            // Arrange
+            var assertation = new AssertThat<object>(new());
+
+            // Act
+            var exception = Record.Exception(() => assertation.IsNotType<string>());
+
+            // Assert
+            Assert.Null(exception);
+        }
+
+        [Fact]
+        public void IsNotType_ItemIsThatType_ThrowsException()
+        {
+            // Arrange
+            var assertation = new AssertThat<object>(new());
+
+            // Act
+            var exception = Record.Exception(() => assertation.IsNotType<object>());
+
+            // Assert
+            Assert.NotNull(exception);
+        }
+
+        [Fact]
+        public void IsNotType_InPositiveCase_ReturnThatObject()
+        {
+            // Arrange
+            var assertThat = new AssertThat<object>(new());
+
+            // Act
+            var result = assertThat.IsNotType<string>();
+
+            // Assert
+            Assert.Same(assertThat, result);
+        }
     }
 }

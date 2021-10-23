@@ -38,5 +38,26 @@
             Assert.Same(item, Item);
             return this;
         }
+
+        /// <summary>
+        /// Verifies that item is exactly the given type (and not derived)
+        /// </summary>
+        /// <typeparam name="U">Checking type</typeparam>
+        public AssertThat<T> IsType<U>()
+        {
+            Assert.IsType<U>(Item);
+            return this;
+        }
+
+
+        /// <summary>
+        /// Verifies that item is exactly not the given type
+        /// </summary>
+        /// <typeparam name="U">Checking type</typeparam>
+        public AssertThat<T> IsNotType<U>()
+        {
+            Assert.IsNotType<U>(Item);
+            return this;
+        }
     }
 }
