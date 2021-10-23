@@ -21,6 +21,26 @@
             return this;
         }
 
+        /// <summary>
+        /// Verifies that current and comparing items are not equal 
+        /// </summary>
+        /// <param name="item">Comparing item</param>
+        public AssertThat<T> IsNotEqualTo(T item)
+        {
+            Assert.NotEqual(item, Item);
+            return this;
+        }
+
+        /// <summary>
+        /// Verifies that current and comparing items are not equal
+        /// </summary>
+        /// <param name="item">Comparing item</param>
+        public AssertThat<T> IsNotEqualTo(object item)
+        {
+            Assert.NotEqual(item, Item);
+            return this;
+        }
+
         public AssertThat<T> IsNull()
         {
             Assert.Null(Item);
@@ -36,6 +56,16 @@
         public AssertThat<T> IsSame(T item)
         {
             Assert.Same(item, Item);
+            return this;
+        }
+
+        /// <summary>
+        /// Verifies that current and comparing items are not same instance
+        /// </summary>
+        /// <param name="item">Comparing item</param>
+        public AssertThat<T> IsNotSame(T item)
+        {
+            Assert.NotSame(item, Item);
             return this;
         }
 

@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using Xunit.Assertation.Extensions.Exceptions;
 
@@ -270,6 +271,62 @@ namespace Xunit.Assertation.Extensions.Test
 
             // Act && Assert
             Assert.ThatCode(() => assert.Collection(inspectors)).Throws();
+        }
+
+        [Theory]
+        [MemberData(nameof(CollectionData))]
+        public void ForEach_AllActionsAreDoneSuccessfully_DoesNotThrowException(ICollection<int> collection)
+        {
+            // Arrange
+            var assert = new AssertThatIEnumerable<ICollection<int>, int>(collection);
+
+            // Act && Assert
+            Assert.ThatCode(() => assert.ForEach(x => { })).DoesNotThrow();
+        }
+
+        [Theory]
+        [MemberData(nameof(CollectionData))]
+        public void ForEach_OneActionThrowsException_ThrowsAssertForEachException(ICollection<int> collection)
+        {
+            // Arrange
+            var assert = new AssertThatIEnumerable<ICollection<int>, int>(collection);
+            
+            void action(int x)
+            {
+                if (x == collection.Last())
+                    throw new Exception();
+            }
+
+            // Act && Assert
+            Assert.ThatCode(() => assert.ForEach(action)).Throws<AssertForEachException>();
+        }
+
+        [Theory]
+        [MemberData(nameof(CollectionData))]
+        public void AssertForEach_AllAssertationsAreDoneSuccessfully_DoesNotThrowException(ICollection<int> collection)
+        {
+            // Arrange
+            var assert = new AssertThatIEnumerable<ICollection<int>, int>(collection);
+
+            // Act && Assert
+            Assert.ThatCode(() => assert.AssertForEach(x => { })).DoesNotThrow();
+        }
+
+        [Theory]
+        [MemberData(nameof(CollectionData))]
+        public void AssertForEach_OneAssertationThrowsException_ThrowsAssertForEachException(ICollection<int> collection)
+        {
+            // Arrange
+            var assert = new AssertThatIEnumerable<ICollection<int>, int>(collection);
+
+            void action(AssertThat<int> x)
+            {
+                if (x.Item == collection.Last())
+                    throw new Exception();
+            }
+
+            // Act && Assert
+            Assert.ThatCode(() => assert.AssertForEach(action)).Throws<AssertForEachException>();
         }
     }
 }

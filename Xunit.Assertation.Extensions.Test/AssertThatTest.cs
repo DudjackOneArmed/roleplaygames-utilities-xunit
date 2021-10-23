@@ -215,5 +215,47 @@
             // Assert
             Assert.Same(assertThat, result);
         }
+
+        [Theory]
+        [InlineData(12, 13)]
+        public void IsNotEqualTo_ItemIsNotEqualToExpected_DoesNotThrowException(int actual, int expected)
+        {
+            // Arrange
+            var assertation = new AssertThat<int>(actual);
+
+            // Act
+            var exception = Record.Exception(() => assertation.IsNotEqualTo(expected));
+
+            // Assert
+            Assert.Null(exception);
+        }
+
+        [Theory]
+        [InlineData(12, 12)]
+        public void IsNotEqualTo_ItemIsEqualToExpected_ThrowsException(int actual, int expected)
+        {
+            // Arrange
+            var assertation = new AssertThat<int>(actual);
+
+            // Act
+            var exception = Record.Exception(() => assertation.IsNotEqualTo(expected));
+
+            // Assert
+            Assert.NotNull(exception);
+        }
+
+        [Fact]
+        public void IsNotEqualTo_InPositiveCase_ReturnThatObject()
+        {
+            // Arrange
+            var obj = 2;
+            var assertThat = new AssertThat<int>(1);
+
+            // Act
+            var result = assertThat.IsNotEqualTo(obj);
+
+            // Assert
+            Assert.Same(assertThat, result);
+        }
     }
 }

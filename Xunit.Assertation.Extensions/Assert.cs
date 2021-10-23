@@ -52,7 +52,7 @@ namespace Xunit
             }
 
             if (exceptions.Any())
-                throw new AssertAllExceptions(exceptions);
+                throw new AssertAllException(exceptions);
         }
 
         public static AssertThatAction ThatCode(Action action) => new AssertThatAction(action);

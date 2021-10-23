@@ -129,5 +129,57 @@ namespace Xunit.Assertation.Extensions
 
             return this;
         }
+
+        /// <summary>
+        /// Tries to do action for each element and collect all exceptions to one
+        /// </summary>
+        /// <param name="action">Action for each item</param>
+        public AssertThatIEnumerable<U, T> ForEach(Action<T> action)
+        {
+            var exceptions = new List<Exception>();
+
+            foreach (var item in Item)
+            {
+                try
+                {
+                    action.Invoke(item);
+                }
+                catch (Exception ex)
+                {
+                    exceptions.Add(ex);
+                }
+            }
+
+            if (exceptions.Any())
+                throw new AssertForEachException(exceptions);
+            else 
+                return this;
+        }
+
+        /// <summary>
+        /// Tries to do action for each element and collect all exceptions to one
+        /// </summary>
+        /// <param name="action">Action for each item</param>
+        public AssertThatIEnumerable<U, T> AssertForEach(Action<AssertThat<T>> action)
+        {
+            var exceptions = new List<Exception>();
+
+            foreach (var item in Item)
+            {
+                try
+                {
+                    action.Invoke(new AssertThat<T>(item));
+                }
+                catch (Exception ex)
+                {
+                    exceptions.Add(ex);
+                }
+            }
+
+            if (exceptions.Any())
+                throw new AssertForEachException(exceptions);
+            else 
+                return this;
+        }
     }
 }

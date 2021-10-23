@@ -71,9 +71,9 @@ namespace Xunit.Assertation.Extensions.Test
 
             // Assert
             Assert.NotNull(exception);
-            Assert.IsType<AssertAllExceptions>(exception);
+            Assert.IsType<AssertAllException>(exception);
 
-            var assertAllExceptions = exception as AssertAllExceptions;
+            var assertAllExceptions = exception as AssertAllException;
 
             Assert.Equal(2, assertAllExceptions.InnerExceptions.Count);
         }
