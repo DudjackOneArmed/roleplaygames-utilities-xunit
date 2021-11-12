@@ -9,7 +9,7 @@
             var assert = new AssertThatBoolean(true);
 
             // Act && Assert
-            Assert.ThatCode(() => assert.IsTrue()).DoesNotThrow();
+            Assert.ThatCode(() => assert.IsTrue()).DoesNotThrowException();
         }
 
         [Fact]
@@ -19,7 +19,7 @@
             var assert = new AssertThatBoolean(false);
 
             // Act && Assert
-            Assert.ThatCode(() => assert.IsFalse()).DoesNotThrow();
+            Assert.ThatCode(() => assert.IsFalse()).DoesNotThrowException();
         }
 
         [Fact]

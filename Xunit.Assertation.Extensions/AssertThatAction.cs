@@ -24,7 +24,7 @@ namespace Xunit.Assertation.Extensions
             return this;
         }
 
-        public AssertThatAction DoesNotThrow()
+        public AssertThatAction DoesNotThrowException()
         {
             try
             {
