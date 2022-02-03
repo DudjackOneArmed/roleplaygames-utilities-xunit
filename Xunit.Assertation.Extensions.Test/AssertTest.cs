@@ -1,9 +1,35 @@
-﻿using Xunit.Assertation.Extensions.Exceptions;
+﻿using System.Collections.Generic;
+using Xunit.Assertation.Extensions.Exceptions;
 
 namespace Xunit.Assertation.Extensions.Test
 {
     public class AssertTest
     {
+        [Theory]
+        [InlineData(true)]
+        [InlineData(false)]
+        public void That_WhenItemIsBoolean_ReturnsObjectOfAssertThatBoolean(bool item)
+        {
+            // Arrange && Act
+            var assertThat = Assert.That(item);
+
+            // Assert
+            Assert.IsType<AssertThatBoolean>(assertThat);
+        }
+
+        [Fact]
+        public void ThatCollection_WhenItemIsIEnumerable_ReturnsAssertThatIEnumerable()
+        {
+            // Arrange
+            var enumerable = new LinkedList<decimal>();
+
+            // Act
+            var assertThat = Assert.ThatCollection(enumerable);
+
+            // Assert
+            Assert.IsType<AssertThatIEnumerable<IEnumerable<decimal>, decimal>>(assertThat);
+        }
+
         [Fact]
         public void All_ActionsNotThrowExceptions_DoesNotThrowException()
         {
@@ -45,9 +71,9 @@ namespace Xunit.Assertation.Extensions.Test
 
             // Assert
             Assert.NotNull(exception);
-            Assert.IsType<AssertAllExceptions>(exception);
+            Assert.IsType<AssertAllException>(exception);
 
-            var assertAllExceptions = exception as AssertAllExceptions;
+            var assertAllExceptions = exception as AssertAllException;
 
             Assert.Equal(2, assertAllExceptions.InnerExceptions.Count);
         }

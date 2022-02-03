@@ -20,11 +20,19 @@ namespace Xunit.Assertation.Extensions
 
         public AssertThatFunction<T> Throws()
         {
-            Assert.Throws<Exception>(() => Func.Invoke());
-            return this;
+            try
+            {
+                Func.Invoke();
+            }
+            catch (Exception)
+            {
+                return this;
+            }
+
+            throw new ThrowsAssertationException();
         }
 
-        public AssertThatFunction<T> DoesNotThrow()
+        public AssertThatFunction<T> DoesNotThrowException()
         {
             try
             {

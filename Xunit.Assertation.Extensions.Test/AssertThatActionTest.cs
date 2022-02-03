@@ -6,26 +6,26 @@ namespace Xunit.Assertation.Extensions.Test
     public class AssertThatActionTest
     {
         [Fact]
-        public void DoesNotThrow_ActionDoesNotThrowException_DoesNotThrowException()
+        public void DoesNotThrowException_ActionDoesNotThrowException_DoesNotThrowException()
         {
             // Arrange
             AssertThatAction assertThatAction = new(() => { });
 
             // Act
-            var exception = Record.Exception(() => assertThatAction.DoesNotThrow());
+            var exception = Record.Exception(() => assertThatAction.DoesNotThrowException());
 
             // Assert
             Assert.Null(exception);
         }
 
         [Fact]
-        public void DoesNotThrow_ActionThrowsException_ThrowsDoesNotThrowAssertationException()
+        public void DoesNotThrowException_ActionThrowsException_ThrowsDoesNotThrowAssertationException()
         {
             // Arrange
             AssertThatAction assertThatAction = new(() => throw new Exception());
 
             // Act & Assert
-            Assert.Throws<DoesNotThrowAssertationException>(() => assertThatAction.DoesNotThrow());
+            Assert.Throws<DoesNotThrowAssertationException>(() => assertThatAction.DoesNotThrowException());
         }
 
         [Fact]
@@ -42,13 +42,13 @@ namespace Xunit.Assertation.Extensions.Test
         }
 
         [Fact]
-        public void DoesNotThrow_InPositiveCase_ReturnThatObject()
+        public void DoesNotThrowException_InPositiveCase_ReturnThatObject()
         {
             // Arrange
             AssertThatAction assertThatAction = new(() => { });
 
             // Act
-            var result = assertThatAction.DoesNotThrow();
+            var result = assertThatAction.DoesNotThrowException();
 
             // Assert
             Assert.Same(assertThatAction, result);
