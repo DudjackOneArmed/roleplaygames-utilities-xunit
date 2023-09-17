@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Threading.Tasks;
 using Xunit.Assertation.Extensions.Exceptions;
 
 namespace Xunit.Assertation.Extensions.Test

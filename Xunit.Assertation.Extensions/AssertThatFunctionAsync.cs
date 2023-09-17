@@ -1,22 +1,23 @@
 ﻿using System;
+using System.Threading.Tasks;
 using Xunit.Assertation.Extensions.Exceptions;
 
 namespace Xunit.Assertation.Extensions
 {
-    public class AssertThatFunction<T>
+    public class AssertThatFunctionAsync<T>
     {
-        public Func<T> Func { get; }
+        public Func<Task<T>> Func { get; }
 
-        public AssertThatFunction(Func<T> func)
+        public AssertThatFunctionAsync(Func<Task<T>> func)
         {
             Func = func ?? throw new ArgumentNullException(nameof(func));
         }
 
-        public AssertThatFunction<T> Throws<TException>() where TException : Exception
+        public AssertThatFunctionAsync<T> Throws<TException>() where TException : Exception
         {
             try
             {
-                Func.Invoke();
+                Task.Run(Func.Invoke).ConfigureAwait(false).GetAwaiter().GetResult();
             }
             catch (TException)
             {
@@ -30,14 +31,14 @@ namespace Xunit.Assertation.Extensions
             throw new ThrowsAssertationException();
         }
 
-        public AssertThatFunction<T> Throws<TException>(Predicate<Exception> predicate) where TException : Exception
+        public AssertThatFunctionAsync<T> Throws<TException>(Predicate<Exception> predicate) where TException : Exception
         {
             if (predicate == null)
                 throw new ArgumentNullException(nameof(predicate));
 
             try
             {
-                Func.Invoke();
+                Task.Run(Func.Invoke).ConfigureAwait(false).GetAwaiter().GetResult();
             }
             catch (TException ex)
             {
@@ -52,11 +53,11 @@ namespace Xunit.Assertation.Extensions
             throw new ThrowsAssertationException();
         }
 
-        public AssertThatFunction<T> Throws()
+        public AssertThatFunctionAsync<T> Throws()
         {
             try
             {
-                Func.Invoke();
+                Task.Run(Func.Invoke).ConfigureAwait(false).GetAwaiter().GetResult();
             }
             catch (Exception)
             {
@@ -66,14 +67,14 @@ namespace Xunit.Assertation.Extensions
             throw new ThrowsAssertationException();
         }
 
-        public AssertThatFunction<T> Throws(Predicate<Exception> predicate)
+        public AssertThatFunctionAsync<T> Throws(Predicate<Exception> predicate)
         {
             if (predicate == null)
                 throw new ArgumentNullException(nameof(predicate));
 
             try
             {
-                Func.Invoke();
+                Task.Run(Func.Invoke).GetAwaiter().GetResult();
             }
             catch (Exception ex)
             {
@@ -84,11 +85,11 @@ namespace Xunit.Assertation.Extensions
             throw new ThrowsAssertationException();
         }
 
-        public AssertThatFunction<T> DoesNotThrowException()
+        public AssertThatFunctionAsync<T> DoesNotThrowException()
         {
             try
             {
-                Func.Invoke();
+                Task.Run(Func.Invoke).ConfigureAwait(false).GetAwaiter().GetResult();
             }
             catch (Exception ex)
             {
@@ -97,10 +98,10 @@ namespace Xunit.Assertation.Extensions
 
             return this;
         }
-
-        public AssertThatFunction<T> Returns(T expectedResult)
+        
+        public AssertThatFunctionAsync<T> Returns(T expectedResult)
         {
-            var result = Func.Invoke();
+            var result = Task.Run(Func.Invoke).ConfigureAwait(false).GetAwaiter().GetResult();
 
             return result.Equals(expectedResult)
                 ? this

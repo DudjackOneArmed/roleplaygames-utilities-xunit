@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading.Tasks;
 using Xunit.Assertation.Extensions.Exceptions;
 
 namespace Xunit.Assertation.Extensions
@@ -14,14 +15,74 @@ namespace Xunit.Assertation.Extensions
 
         public AssertThatAction Throws<TException>() where TException : Exception
         {
-            Assert.Throws<TException>(() => Action.Invoke());
-            return this;
+            try
+            {
+                Action.Invoke();
+            }
+            catch (TException)
+            {
+                return this;
+            }
+            catch (Exception ex)
+            {
+                throw new ThrowsWrongExceptionTypeException<TException>(ex);
+            }
+
+            throw new ThrowsAssertationException();
+        }
+
+        public AssertThatAction Throws<TException>(Predicate<Exception> predicate) where TException : Exception
+        {
+            if (predicate == null)
+                throw new ArgumentNullException(nameof(predicate));
+
+            try
+            {
+                Action.Invoke();
+            }
+            catch (TException ex)
+            {
+                if (predicate(ex))
+                    return this;
+            }
+            catch (Exception ex)
+            {
+                throw new ThrowsWrongExceptionTypeException<TException>(ex);
+            }
+
+            throw new ThrowsAssertationException();
         }
 
         public AssertThatAction Throws()
         {
-            Assert.Throws<Exception>(() => Action.Invoke());
-            return this;
+            try
+            {
+                Action.Invoke();
+            }
+            catch (Exception)
+            {
+                return this;
+            }
+
+            throw new ThrowsAssertationException();
+        }
+
+        public AssertThatAction Throws(Predicate<Exception> predicate)
+        {
+            if (predicate == null)
+                throw new ArgumentNullException(nameof(predicate));
+
+            try
+            {
+                Action.Invoke();
+            }
+            catch (Exception ex)
+            {
+                if (predicate(ex))
+                    return this;
+            }
+
+            throw new ThrowsAssertationException();
         }
 
         public AssertThatAction DoesNotThrowException()
@@ -29,12 +90,13 @@ namespace Xunit.Assertation.Extensions
             try
             {
                 Action.Invoke();
-                return this;
-            } 
-            catch(Exception ex)
+            }
+            catch (Exception ex)
             {
                 throw new DoesNotThrowAssertationException(ex);
             }
+
+            return this;
         }
     }
 }

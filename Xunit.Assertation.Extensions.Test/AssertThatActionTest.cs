@@ -24,12 +24,29 @@ namespace Xunit.Assertation.Extensions.Test
             // Arrange
             AssertThatAction assertThatAction = new(() => throw new Exception());
 
-            // Act & Assert
-            Assert.Throws<DoesNotThrowAssertationException>(() => assertThatAction.DoesNotThrowException());
+            // Act
+            var exception = Record.Exception(() => assertThatAction.DoesNotThrowException());
+
+            // Assert
+            Assert.NotNull(exception);
+            Assert.IsType<DoesNotThrowAssertationException>(exception);
         }
 
         [Fact]
-        public void Throws_InPositiveCase_ReturnThatObject()
+        public void DoesNotThrowException_ActionDoesNotThrowException_ReturnsThatObject()
+        {
+            // Arrange
+            AssertThatAction assertThatAction = new(() => { });
+
+            // Act
+            var result = assertThatAction.DoesNotThrowException();
+
+            // Assert
+            Assert.Same(assertThatAction, result);
+        }
+
+        [Fact]
+        public void Throws_ActionThrowsException_ReturnsThatObject()
         {
             // Arrange
             AssertThatAction assertThatAction = new(() => throw new Exception());
@@ -42,16 +59,58 @@ namespace Xunit.Assertation.Extensions.Test
         }
 
         [Fact]
-        public void DoesNotThrowException_InPositiveCase_ReturnThatObject()
+        public void Throws_ActionDoesNotThrowException_ThrowsThrowsAssertationException()
         {
             // Arrange
             AssertThatAction assertThatAction = new(() => { });
 
             // Act
-            var result = assertThatAction.DoesNotThrowException();
+            var exception = Record.Exception(() => assertThatAction.Throws());
+
+            // Assert
+            Assert.NotNull(exception);
+            Assert.IsType<ThrowsAssertationException>(exception);
+        }
+
+        [Fact]
+        public void ThrowsGeneric_ActionThrowsException_ReturnsThatObject()
+        {
+            // Arrange
+            AssertThatAction assertThatAction = new(() => throw new ArgumentException());
+
+            // Act
+            var result = assertThatAction.Throws<ArgumentException>();
 
             // Assert
             Assert.Same(assertThatAction, result);
+        }
+
+        [Fact]
+        public void ThrowsGeneric_ActionDoesNotThrowException_ThrowsThrowsAssertationException()
+        {
+            // Arrange
+            AssertThatAction assertThatAction = new(() => { });
+
+            // Act
+            var exception = Record.Exception(() => assertThatAction.Throws());
+
+            // Assert
+            Assert.NotNull(exception);
+            Assert.IsType<ThrowsAssertationException>(exception);
+        }
+
+        [Fact]
+        public void ThrowsGeneric_ActionThrowsWrongTypeException_ThrowsThrowsWrongExceptionTypeException()
+        {
+            // Arrange
+            AssertThatAction assertThatAction = new(() => throw new Exception());
+
+            // Act
+            var exception = Record.Exception(() => assertThatAction.Throws<ArgumentException>());
+
+            // Assert
+            Assert.NotNull(exception);
+            Assert.IsType<ThrowsWrongExceptionTypeException<ArgumentException>>(exception);
         }
     }
 }

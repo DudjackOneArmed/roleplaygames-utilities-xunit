@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using Xunit.Assertation.Extensions;
 using Xunit.Assertation.Extensions.Exceptions;
 
@@ -58,5 +59,9 @@ namespace Xunit
         public static AssertThatAction ThatCode(Action action) => new AssertThatAction(action);
 
         public static AssertThatFunction<T> ThatCode<T>(Func<T> func) => new AssertThatFunction<T>(func);
+
+        public static AssertThatActionAsync ThatAsyncCode(Func<Task> func) => new AssertThatActionAsync(func);
+
+        public static AssertThatFunctionAsync<T> ThatAsyncCode<T>(Func<Task<T>> func) => new AssertThatFunctionAsync<T>(func);
     }
 }

@@ -1,18 +1,19 @@
 ﻿using System;
+using System.Threading.Tasks;
 using Xunit.Assertation.Extensions.Exceptions;
 
 namespace Xunit.Assertation.Extensions.Test
 {
-    public class AssertThatFunctionTest
+    public class AssertThatFunctionAsyncTest
     {
         [Fact]
         public void DoesNotThrowException_FunctionDoesNotThrowException_DoesNotThrowException()
         {
             // Arrange
-            AssertThatFunction<object> assertThatAction = new(() => new object());
+            AssertThatFunctionAsync<object> assertThatActionAsync = new(() => Task.FromResult(new object()));
 
             // Act
-            var exception = Record.Exception(() => assertThatAction.DoesNotThrowException());
+            var exception = Record.Exception(() => assertThatActionAsync.DoesNotThrowException());
 
             // Assert
             Assert.Null(exception);
@@ -22,10 +23,10 @@ namespace Xunit.Assertation.Extensions.Test
         public void DoesNotThrowException_FunctionThrowsException_ThrowsDoesNotThrowAssertationException()
         {
             // Arrange
-            AssertThatFunction<object> assertThatAction = new(() => throw new Exception());
+            AssertThatFunctionAsync<object> assertThatActionAsync = new(() => throw new Exception());
 
             // Act
-            var exception = Record.Exception(() => assertThatAction.DoesNotThrowException());
+            var exception = Record.Exception(() => assertThatActionAsync.DoesNotThrowException());
 
             // Assert
             Assert.NotNull(exception);
@@ -33,39 +34,39 @@ namespace Xunit.Assertation.Extensions.Test
         }
 
         [Fact]
-        public void DoesNotThrowException_FuntionDoesNotThrowException_ReturnsThatObject()
+        public void DoesNotThrowException_FunctionDoesNotThrowException_ReturnsThatObject()
         {
             // Arrange
-            AssertThatFunction<object> assertThatAction = new(() => new object());
+            AssertThatFunctionAsync<object> assertThatActionAsync = new(() => Task.FromResult(new object()));
 
             // Act
-            var result = assertThatAction.DoesNotThrowException();
+            var result = assertThatActionAsync.DoesNotThrowException();
 
             // Assert
-            Assert.Same(assertThatAction, result);
+            Assert.Same(assertThatActionAsync, result);
         }
 
         [Fact]
         public void Throws_FunctionThrowsException_ReturnsThatObject()
         {
             // Arrange
-            AssertThatFunction<object> assertThatAction = new(() => throw new Exception());
+            AssertThatFunctionAsync<object> assertThatActionAsync = new(() => throw new Exception());
 
             // Act
-            var result = assertThatAction.Throws();
+            var result = assertThatActionAsync.Throws();
 
             // Assert
-            Assert.Same(assertThatAction, result);
+            Assert.Same(assertThatActionAsync, result);
         }
 
         [Fact]
         public void Throws_FunctionDoesNotThrowException_ThrowsThrowsAssertationException()
         {
             // Arrange
-            AssertThatFunction<object> assertThatAction = new(() => new());
+            AssertThatFunctionAsync<object> assertThatActionAsync = new(() => Task.FromResult(new object()));
 
             // Act
-            var exception = Record.Exception(() => assertThatAction.Throws());
+            var exception = Record.Exception(() => assertThatActionAsync.Throws());
 
             // Assert
             Assert.NotNull(exception);
@@ -76,23 +77,23 @@ namespace Xunit.Assertation.Extensions.Test
         public void ThrowsGeneric_FunctionThrowsException_ReturnsThatObject()
         {
             // Arrange
-            AssertThatFunction<object> assertThatAction = new(() => throw new ArgumentException());
+            AssertThatFunctionAsync<object> assertThatActionAsync = new(() => throw new ArgumentException());
 
             // Act
-            var result = assertThatAction.Throws<ArgumentException>();
+            var result = assertThatActionAsync.Throws<ArgumentException>();
 
             // Assert
-            Assert.Same(assertThatAction, result);
+            Assert.Same(assertThatActionAsync, result);
         }
 
         [Fact]
         public void ThrowsGeneric_FunctionDoesNotThrowException_ThrowsThrowsAssertationException()
         {
             // Arrange
-            AssertThatFunction<object> assertThatAction = new(() => new());
+            AssertThatFunctionAsync<object> assertThatActionAsync = new(() => Task.FromResult(new object()));
 
             // Act
-            var exception = Record.Exception(() => assertThatAction.Throws<ArgumentException>());
+            var exception = Record.Exception(() => assertThatActionAsync.Throws<ArgumentException>());
 
             // Assert
             Assert.NotNull(exception);
@@ -103,10 +104,10 @@ namespace Xunit.Assertation.Extensions.Test
         public void ThrowsGeneric_FunctionThrowsWrongTypeException_ThrowsThrowsWrongExceptionTypeException()
         {
             // Arrange
-            AssertThatFunction<object> assertThatAction = new(() => throw new Exception());
+            AssertThatFunctionAsync<object> assertThatActionAsync = new(() => throw new Exception());
 
             // Act
-            var exception = Record.Exception(() => assertThatAction.Throws<ArgumentException>());
+            var exception = Record.Exception(() => assertThatActionAsync.Throws<ArgumentException>());
 
             // Assert
             Assert.NotNull(exception);
@@ -118,23 +119,23 @@ namespace Xunit.Assertation.Extensions.Test
         {
             // Arrange
             object obj = new();
-            AssertThatFunction<object> assertThatAction = new(() => obj);
+            AssertThatFunctionAsync<object> assertThatActionAsync = new(() => Task.FromResult(obj));
 
             // Act
-            var result = assertThatAction.Returns(obj);
+            var result = assertThatActionAsync.Returns(obj);
 
             // Assert
-            Assert.Same(assertThatAction, result);
+            Assert.Same(assertThatActionAsync, result);
         }
 
         [Fact]
-        public void Returns_FunctionReturnsWrongResult_ThrowsReturnsWrongResultException()
+        public void Returns_FunctionReturnsNotExpectedResult_ThrowsReturnsWrongResultException()
         {
             // Arrange
-            AssertThatFunction<object> assertThatAction = new(() => new());
+            AssertThatFunctionAsync<object> assertThatActionAsync = new(() => Task.FromResult(new object()));
 
             // Act
-            var exception = Record.Exception(() => assertThatAction.Returns(new()));
+            var exception = Record.Exception(() => assertThatActionAsync.Returns(new object()));
 
             // Assert
             Assert.NotNull(exception);
