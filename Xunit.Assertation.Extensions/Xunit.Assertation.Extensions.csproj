@@ -4,13 +4,12 @@
     <TargetFramework>netstandard2.1</TargetFramework>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <PackageId>xunit.assertation.extensions</PackageId>
-    <Version>0.1.2-alpha</Version>
+    <Version>0.1.3-alpha</Version>
     <Authors>Ganoes</Authors>
-    <RepositoryUrl>https://bitbucket.org/Ganoes/testutilities</RepositoryUrl>
+    <RepositoryUrl>https://github.com/DudjackOneArmed/roleplaygames-utilities-xunit</RepositoryUrl>
     <Description>Extend xunit Assert class with Assert.That(...) methods</Description>
     <PackageReleaseNotes>
-      - Readme was added
-	  - Sync async code checks were fised with CofigureAwait(false)
+      - Async checks for async code were added
     </PackageReleaseNotes>
   </PropertyGroup>
 
