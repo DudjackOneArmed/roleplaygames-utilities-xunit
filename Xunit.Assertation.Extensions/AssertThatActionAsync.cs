@@ -53,11 +53,65 @@ namespace Xunit.Assertation.Extensions
             throw new ThrowsAssertationException();
         }
 
+        public async Task<AssertThatActionAsync> ThrowsAsync<TException>() where TException : Exception
+        {
+            try
+            {
+                await Action.Invoke();
+            }
+            catch (TException)
+            {
+                return this;
+            }
+            catch (Exception ex)
+            {
+                throw new ThrowsWrongExceptionTypeException<TException>(ex);
+            }
+
+            throw new ThrowsAssertationException();
+        }
+
+        public async Task<AssertThatActionAsync> ThrowsAsync<TException>(Predicate<Exception> predicate) where TException : Exception
+        {
+            if (predicate == null)
+                throw new ArgumentNullException(nameof(predicate));
+
+            try
+            {
+                await Action.Invoke();
+            }
+            catch (TException ex)
+            {
+                if (predicate(ex))
+                    return this;
+            }
+            catch (Exception ex)
+            {
+                throw new ThrowsWrongExceptionTypeException<TException>(ex);
+            }
+
+            throw new ThrowsAssertationException();
+        }
+
         public AssertThatActionAsync Throws()
         {
             try
             {
                 Task.Run(Action.Invoke).ConfigureAwait(false).GetAwaiter().GetResult();
+            }
+            catch (Exception)
+            {
+                return this;
+            }
+
+            throw new ThrowsAssertationException();
+        }
+
+        public async Task<AssertThatActionAsync> ThrowsAsync()
+        {
+            try
+            {
+                await Action.Invoke();
             }
             catch (Exception)
             {
@@ -85,11 +139,43 @@ namespace Xunit.Assertation.Extensions
             throw new ThrowsAssertationException();
         }
 
+        public async Task<AssertThatActionAsync> ThrowsAsync(Predicate<Exception> predicate)
+        {
+            if (predicate == null)
+                throw new ArgumentNullException(nameof(predicate));
+
+            try
+            {
+                await Action.Invoke();
+            }
+            catch (Exception ex)
+            {
+                if (predicate(ex))
+                    return this;
+            }
+
+            throw new ThrowsAssertationException();
+        }
+
         public AssertThatActionAsync DoesNotThrowException()
         {
             try
             {
                 Task.Run(Action.Invoke).ConfigureAwait(false).GetAwaiter().GetResult();
+            }
+            catch (Exception ex)
+            {
+                throw new DoesNotThrowAssertationException(ex);
+            }
+
+            return this;
+        }
+
+        public async Task<AssertThatActionAsync> DoesNotThrowExceptionAsync()
+        {
+            try
+            {
+                await Action.Invoke();
             }
             catch (Exception ex)
             {
